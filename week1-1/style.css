@@ -1,0 +1,47 @@
+body {
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+main {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+section {
+    padding: 20px;
+    flex: 2;
+    background-color: white;
+}
+
+aside {
+    flex: 1;
+    background-color: white;
+    padding: 20px;
+}
+
+ol {
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    background-color: blue;
+    text-align: center;
+    justify-content: center;
+    height: 90px;
+    margin-bottom: 20px;
+}
+
+.main_title {
+    color: white;
+}
+
+footer {
+    background-color: blue;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}

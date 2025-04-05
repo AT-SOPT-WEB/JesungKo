@@ -1,0 +1,31 @@
+h1 {
+    color: orange;
+}
+
+h3 {
+    color: indianred;
+}
+
+#ul {
+    background-color: black;
+    width: 150px;
+}
+
+#ul:hover {
+    background-color: white;
+}
+
+.li_1 {
+    color: red;
+}
+
+.li_2 {
+    color: orange;
+}
+.li_3 {
+    color: yellow;
+}
+
+li:hover {
+    text-decoration: underline;
+}
