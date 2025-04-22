@@ -6,18 +6,18 @@
     flex-direction: column;
 }
 
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
 header {
     width: 80vw;
     padding: 20px;
     display: flex;
     gap: 15px;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 header button {
@@ -26,6 +26,35 @@ header button {
     border-radius: 5px;
     padding: 8px;
     color: black;
+}
+
+.modal-section {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+/* 기존에는 display: none 적용 */
+
+/* modal-section에 show 클래스가 부여되면 display none이 flex로 덮여지면서 modal 내부 요소들도 flex 효과 받고 none 사라지게 적용! */
+.modal-section.show {
+    display: flex;
+}
+
+.modal-section article {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 30%;
+    height: 30%;
+    align-items: center;
+    justify-content: center;
 }
 
 main {
