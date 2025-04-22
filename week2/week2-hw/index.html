@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>투두 리스트</title>
+        <link rel="stylesheet" href="style.css" />
+        <script type="module" src="index.js"></script>
+    </head>
+
+    <body>
+        <div class="all-container">
+            <header>
+                <button class="all-filter">전체</button><button class="complete-filter">완료됨</button
+                ><button class="non-complete-filter">미완료</button><button class="importance-filter">중요도</button>
+            </header>
+            <main>
+                <section class="input-section">
+                    <input placeholder="할 일을 입력하세요" />
+                    <article>중요도 선택</article>
+                    <button>추가</button>
+                </section>
+                <section class="control-section">
+                    <button class="delete-button">삭제</button><button class="complete-button">완료</button>
+                </section>
+                <section class="table-section">
+                    <table>
+                        <tr>
+                            <th>체크</th>
+                            <th>중요도</th>
+                            <th>완료됨</th>
+                            <th>할일</th>
+                        </tr>
+                    </table>
+                </section>
+            </main>
+        </div>
+    </body>
+</html>
