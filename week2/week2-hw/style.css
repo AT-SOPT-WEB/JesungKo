@@ -107,13 +107,25 @@ table {
     border-collapse: collapse;
     width: 100%;
 }
-th {
-    border: 1px solid black;
-    padding: 10px 20px;
+
+tr {
+    background-color: white;
+}
+
+tr:nth-child(1) {
     background-color: azure;
 }
 
-th:nth-child(1) {
+th {
+    padding: 10px 20px;
+    border: 1px solid black;
+}
+
+colgroup {
+    width: 100%;
+}
+
+/* th:nth-child(1) {
     width: 15%;
 }
 th:nth-child(2) {
@@ -124,4 +136,4 @@ th:nth-child(3) {
 }
 th:nth-child(4) {
     width: 55%;
-}
+} */
