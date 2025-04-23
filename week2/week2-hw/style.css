@@ -26,6 +26,36 @@ header button {
     border-radius: 5px;
     padding: 8px;
     color: black;
+    justify-content: space-around;
+    display: flex;
+    gap: 5px;
+}
+
+header img {
+    width: 10px;
+    object-fit: contain;
+}
+
+.dropdown-article {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    display: none;
+    z-index: 50;
+    width: 100%;
+    flex-direction: column;
+    background-color: aliceblue;
+}
+
+.dropdown-menu.show {
+    display: flex;
+}
+
+.dropdown-menu button {
+    width: 100%;
+    margin-top: 5px;
 }
 
 .modal-section {
