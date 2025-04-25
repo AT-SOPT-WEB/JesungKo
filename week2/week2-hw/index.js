@@ -168,6 +168,8 @@ const checkAll = () => {
     });
     if (nonCheckedList.length === 0) {
         allCheckBox.checked = true;
+    } else {
+        allCheckBox.checked = false;
     }
 };
 
