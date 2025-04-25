@@ -15,11 +15,13 @@
                 ><button class="non-complete-filter">미완료</button>
                 <article class="dropdown-article">
                     <button class="importance-filter"><span>중요도</span><img src="./icon.png" /></button>
+                    <!-- 필터링에 있는 드롭다운 메뉴 -->
                     <section class="dropdown-menu">
-                        <button class="dropdown-item priority-1">중요도 1</button>
-                        <button class="dropdown-item priority-2">중요도 2</button>
-                        <button class="dropdown-item priority-3">중요도 3</button>
+                        <button class="dropdown-item priority-1">1</button>
+                        <button class="dropdown-item priority-2">2</button>
+                        <button class="dropdown-item priority-3">3</button>
                     </section>
+                    <!-- 필터링에 있는 드롭다운 메뉴 -->
                 </article>
                 <div></div>
             </header>
@@ -34,8 +36,17 @@
             <main>
                 <section class="input-section">
                     <input placeholder="할 일을 입력하세요" />
-                    <article>중요도 선택</article>
-                    <button>추가</button>
+                    <article class="select-priority">
+                        <button class="select-priority-addBtn">중요도 선택</button>
+                        <!-- 투두 추가할 때 입력하는 드롭다운 -->
+                        <section class="select-priority-section">
+                            <button class="dropdown-item priority-2-1">1</button
+                            ><button class="dropdown-item priority-2-2">2</button
+                            ><button class="dropdown-item priority-2-3">3</button>
+                        </section>
+                        <!-- 투두 추가할 때 입력하는 드롭다운 -->
+                    </article>
+                    <button class="add-todo">추가</button>
                 </section>
                 <section class="control-section">
                     <button class="delete-button">삭제</button><button class="complete-button">완료</button>

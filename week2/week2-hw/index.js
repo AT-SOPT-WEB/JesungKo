@@ -3,7 +3,7 @@ import { todos } from './DEFAULTTODO.js';
 const DEFAULT = todos; // 기본으로 주어진 local storage 내용
 const modal = document.querySelector('.modal-section'); // modal 요소 가져오기
 const input = document.querySelector('.input-section input'); // 할 일 입력하는 input
-const addBtn = document.querySelector('.input-section button'); // Todo 추가 버튼
+const addBtn = document.querySelector('.add-todo'); // Todo 추가 버튼
 const table = document.querySelector('.table-section table'); // 할 일 table 가져오기
 const allFilterBtn = document.querySelector('.all-filter'); // 모든 할 일 필터링 버튼
 const completeFilterBtn = document.querySelector('.complete-filter'); // 완료된 할 일 필터링 버튼
@@ -13,18 +13,77 @@ const p_1FilterBtn = document.querySelector('.priority-1');
 const p_2FilterBtn = document.querySelector('.priority-2');
 const p_3FilterBtn = document.querySelector('.priority-3');
 const dropdownMenu = document.querySelector('.dropdown-menu');
+const addTodoPriority = document.querySelector('.select-priority button'); // 새로운 todo 입력할 때의 중요도
+const prioritySection = document.querySelector('.select-priority-section');
+const p_1AddBtn = document.querySelector('.priority-2-1');
+const p_2AddBtn = document.querySelector('.priority-2-2');
+const p_3AddBtn = document.querySelector('.priority-2-3');
+const addTodoPriorityBtn = document.querySelector('.select-priority-addBtn');
 
-localStorage.setItem('todoList', JSON.stringify(DEFAULT)); // 값 넣어두고 시작
-const myTodoList = JSON.parse(localStorage.getItem('todoList')); // 내부적으로 사용할 변수에 담기
+let myTodoList;
+const tmpTodoList = JSON.parse(localStorage.getItem('todoList'));
+
+if (tmpTodoList) {
+    myTodoList = tmpTodoList;
+} else {
+    localStorage.setItem('todoList', JSON.stringify(DEFAULT)); // 값 넣어두고 시작
+    myTodoList = DEFAULT;
+}
 
 let filterMode = 'all'; // completed | non-completed | priority로 나누기
+let addPriority = '중요도 선택'; // default = 중요도 선택 | 1 | 2 | 3으로 나누기
 
 // input 핸들러
 input.addEventListener('input', () => {
     console.log(input.value);
 });
 
-// 중요도 버튼 핸들러
+// 할 일 추가 시 중요도 선택할 때 드롭다운 토글 핸들러
+addTodoPriority.addEventListener('click', () => {
+    prioritySection.classList.toggle('show');
+});
+
+p_1AddBtn.addEventListener('click', () => {
+    addPriority = 1;
+    addTodoPriorityBtn.innerHTML = '1';
+});
+p_2AddBtn.addEventListener('click', () => {
+    addPriority = 2;
+    addTodoPriorityBtn.innerHTML = '2';
+});
+p_3AddBtn.addEventListener('click', () => {
+    addPriority = 3;
+    addTodoPriorityBtn.innerHTML = '3';
+});
+
+// 할 일 추가 버튼 핸들러
+addBtn.addEventListener('click', () => {
+    if (input.value === '' || addPriority === '중요도 선택') {
+        alert('할 일과 중요도를 모두 지정해주세요');
+    } else {
+        const maxId = Math.max(...myTodoList.map((todo) => todo.id));
+
+        const newTodo = {
+            id: maxId + 1,
+            title: input.value,
+            completed: false,
+            priority: addPriority,
+        };
+
+        myTodoList.push(newTodo); // 새로운 todo 리스트에 추가
+
+        localStorage.setItem('todoList', JSON.stringify(myTodoList)); // 추가한 리스트 localStorage에 다시 넣기(이거 기반으로 다시 렌더링)
+
+        // 입력, 중요도 다시 초기화
+        input.value = '';
+        addPriority = '0';
+
+        // 테이블 다시 렌더링
+        renderTodoList();
+    }
+});
+
+// 중요도 버튼(필터링) 핸들러
 importanceFilterBtn.addEventListener('click', () => {
     dropdownMenu.classList.toggle('show'); // toggle 메서드로 class가 있/없에 따라서 사라지고 나타나게
 });
@@ -95,8 +154,8 @@ function renderTodoList() {
     });
 }
 
-addBtn.addEventListener('click', () => {
-    modal.classList.add('show');
-});
+// addBtn.addEventListener('click', () => {
+//     modal.classList.add('show');
+// });
 
 renderTodoList();
