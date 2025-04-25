@@ -155,8 +155,21 @@ function renderTodoList() {
             <th>${todo.title}</th>
         `;
         table.appendChild(tr);
+        const checkbox = tr.querySelector(`.table-${todo.id}`);
+        checkbox.addEventListener('change', checkAll);
     });
 }
+
+// 모든 항목 체크되어 있으면 상단 체크박스도 체크
+const checkAll = () => {
+    const nonCheckedList = filteredList.filter((todo) => {
+        const tableCheckBox = document.querySelector(`.table-${todo.id}`);
+        return !tableCheckBox.checked;
+    });
+    if (nonCheckedList.length === 0) {
+        allCheckBox.checked = true;
+    }
+};
 
 // 테이블 항목 전체 체크하기
 allCheckBox.addEventListener('change', () => {
