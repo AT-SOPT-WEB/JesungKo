@@ -148,6 +148,7 @@ function renderTodoList() {
 
     filteredList.forEach((todo) => {
         const tr = document.createElement('tr');
+        tr.draggable = true;
         tr.innerHTML = `
             <th><input type="checkbox" class="table-${todo.id}"></th>
             <th>${todo.priority}</th>
@@ -155,9 +156,45 @@ function renderTodoList() {
             <th>${todo.title}</th>
         `;
         table.appendChild(tr);
+
+        // 드래그 시작할 때 발생하는 이벤트, todo.id 값을 항목에 저장
+        tr.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('text/plain', todo.id);
+        });
+        // 테이블에서 각 tr들이 드롭을 받을 수 있음을 명시해주는 이벤트!
+        // dragover는 드래그중인 요소가 다른 요소 위에 있을 때 발동되는 이벤트이고
+        // `e.preventDefault()`로 다른 요소가 드롭을 할 수 있도록 허용해주는 것(원래는 안된다 함)
+        tr.addEventListener('dragover', (e) => {
+            e.preventDefault();
+        });
+        // 드래그 중이던 항목을 다른 곳에 놓았을 때 발생하는 이벤트, 전달받은 todo.id 값 사용!
+        tr.addEventListener('drop', (e) => {
+            e.preventDefault();
+            const draggedId = parseInt(e.dataTransfer.getData('text/plain'));
+            if (draggedId !== todo.id) {
+                moveTodoItem(draggedId, todo.id);
+            }
+        });
+
         const checkbox = tr.querySelector(`.table-${todo.id}`);
         checkbox.addEventListener('change', checkAll);
     });
+}
+
+// 드래그해서 옮긴 항목 순서 바꿔서 재정렬하고 localStorage에 다시 저장
+function moveTodoItem(draggedId, targetId) {
+    const draggedIndex = myTodoList.findIndex((todo) => todo.id === draggedId);
+    const targetIndex = myTodoList.findIndex((todo) => todo.id === targetId);
+
+    // draggedIndex에서부터 1개의 요소 지우기(드래그 중인 거 지우고)
+    const [draggedItem] = myTodoList.splice(draggedIndex, 1);
+    // -> 구조 분해 할당 안 쓰면 []로 묶인 배열 자체가 저장되어서 값을 바로 불러올 수 없음
+
+    // targetIndex부터 0개의 요소 지우고 draggedItem 삽입
+    myTodoList.splice(targetIndex, 0, draggedItem);
+
+    localStorage.setItem('todoList', JSON.stringify(myTodoList));
+    renderTodoList();
 }
 
 // 모든 항목 체크되어 있으면 상단 체크박스도 체크
