@@ -22,6 +22,7 @@ const addTodoPriorityBtn = document.querySelector('.select-priority-addBtn');
 const allCheckBox = document.querySelector('.select-all-input'); // 테이블에서 모든 항목 선택할 때 쓸 인풋
 const deleteBtn = document.querySelector('.delete-button'); // 할 일 삭제 버튼
 const completeBtn = document.querySelector('.complete-button'); // 할 일 완료 버튼
+const closeModalBtn = document.querySelector('.close-modal'); // 모달 닫기 버튼
 
 let myTodoList;
 const tmpTodoList = JSON.parse(localStorage.getItem('todoList'));
@@ -178,6 +179,14 @@ completeBtn.addEventListener('click', () => {
         const tableCheckBox = document.querySelector(`.table-${todo.id}`);
         return tableCheckBox.checked;
     });
+
+    const alreadyCompletedItem = checkedList.some((todo) => todo.completed);
+
+    if (alreadyCompletedItem) {
+        modal.classList.add('show');
+        return;
+    }
+
     myTodoList.forEach((todo) => {
         const isChecked = checkedList.some((item) => item.id === todo.id);
         if (isChecked) {
@@ -202,6 +211,10 @@ deleteBtn.addEventListener('click', () => {
 
     localStorage.setItem('todoList', JSON.stringify(myTodoList));
     renderTodoList();
+});
+
+closeModalBtn.addEventListener('click', () => {
+    modal.classList.toggle('show');
 });
 
 // addBtn.addEventListener('click', () => {
