@@ -19,6 +19,7 @@ const p_1AddBtn = document.querySelector('.priority-2-1');
 const p_2AddBtn = document.querySelector('.priority-2-2');
 const p_3AddBtn = document.querySelector('.priority-2-3');
 const addTodoPriorityBtn = document.querySelector('.select-priority-addBtn');
+const allCheckBox = document.querySelector('.select-all-input'); // 테이블에서 모든 항목 선택할 때 쓸 인풋
 
 let myTodoList;
 const tmpTodoList = JSON.parse(localStorage.getItem('todoList'));
@@ -114,13 +115,13 @@ p_3FilterBtn.addEventListener('click', () => {
     renderTodoList();
 });
 
+let filteredList = [];
+
 // 테이블 내용 렌더링하는 함수 -> 렌더링 초기, 버튼 누를 때마다 호출
 function renderTodoList() {
     while (table.rows.length > 1) {
         table.deleteRow(1);
     }
-
-    let filteredList = [];
 
     if (filterMode === 'all') {
         // 전체
@@ -145,7 +146,7 @@ function renderTodoList() {
     filteredList.forEach((todo) => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <th><input type="checkbox" ${todo.completed ? 'checked' : ''}></th>
+            <th><input type="checkbox" class="table-${todo.id}"></th>
             <th>${todo.priority}</th>
             <th>${todo.completed ? '완료' : '미완료'}</th>
             <th>${todo.title}</th>
@@ -153,6 +154,21 @@ function renderTodoList() {
         table.appendChild(tr);
     });
 }
+
+// 테이블 항목 전체 체크하기
+allCheckBox.addEventListener('change', () => {
+    if (allCheckBox.checked) {
+        filteredList.forEach((todo) => {
+            const tableCheckBox = document.querySelector(`.table-${todo.id}`);
+            tableCheckBox.checked = true;
+        });
+    } else {
+        filteredList.forEach((todo) => {
+            const tableCheckBox = document.querySelector(`.table-${todo.id}`);
+            tableCheckBox.checked = false;
+        });
+    }
+});
 
 // addBtn.addEventListener('click', () => {
 //     modal.classList.add('show');
