@@ -18,4 +18,5 @@ const GithubPageWrapper = styled.main`
     height: calc(100vh - 50px);
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 `;
