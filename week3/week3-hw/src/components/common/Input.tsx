@@ -7,7 +7,7 @@ const Input = () => {
 export default Input;
 
 const InputStyle = styled.input`
-    width: 24vw;
+    width: 100%;
     height: 60px;
     border: 3px solid steelblue;
     border-radius: 20px;

@@ -15,6 +15,7 @@ const Header = ({ setMode }) => {
 export default Header;
 
 const HeaderWrapper = styled.header`
+    width: 100vw;
     display: flex;
     background-color: lightsteelblue;
     flex-direction: column;
