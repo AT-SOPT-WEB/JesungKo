@@ -3,30 +3,55 @@ import Input from './common/Input';
 import ListItem from './common/ListItem';
 import { useEffect, useState } from 'react';
 
-const Baseball = () => {
-    const [myKey, setMyKey] = useState('');
-    const [randomKey, setRandomKey] = useState('');
-    const [strike, setStrike] = useState(0);
-    const [ball, setBall] = useState(0);
+const GAME_STATUS = {
+    PLAYING: 'playing',
+    WON: 'won',
+    LOSE: 'LOSE',
+};
 
-    // 무작위 3자리 수 만들고
+const Baseball = () => {
+    // 게임 상태 관리
+    const [gameState, setGameState] = useState({
+        randomKey: '',
+        attempts: [],
+        status: GAME_STATUS.PLAYING,
+    });
+
+    const [message, setMessage] = useState('');
+    const [value, setValue] = useState('');
+
+    /**
+     * 무작위 세자리 숫자를 만들고 반환하는 함수
+     * @returns 문자열로 된 세자리 숫자
+     * @example '123'
+     */
     const getNewRandomKey = () => {
         const numbers = Array.from({ length: 10 }, (_, i) => i);
-
-        // 배열을 섞고 앞에서 3개 선택
         const shuffled = numbers.sort(() => Math.random() - 0.5).slice(0, 3);
-
-        // 문자열로 변환하여 반환
         return shuffled.join('');
+    };
+
+    /**
+     * 게임 초기화 시키는 함수
+     */
+    const initGame = () => {
+        setGameState({
+            randomKey: getNewRandomKey(),
+            attempts: [],
+            status: GAME_STATUS.PLAYING,
+        });
+
+        setMessage('');
     };
 
     /**
      *
      * @param randomKey 랜덤으로 생성된 정답
      * @param myKey 사용자가 입력한 값
-     * @returns 결과 ex) 0스트라이크 1볼
+     * @returns setStrike(스트라이크 카운트), setBall(볼 카운트)
      */
-    const checkStrikeBall = (randomKey, myKey) => {
+    const checkStrikeBall = (myKey) => {
+        const { randomKey } = gameState;
         let strikeCnt = 0;
         let ballCnt = 0;
 
@@ -40,25 +65,27 @@ const Baseball = () => {
             }
         }
 
-        setStrike(strikeCnt);
-        setBall(ballCnt);
-    };
+        setMessage(`${strikeCnt}스트라이크 ${ballCnt}볼`);
 
-    useEffect(() => {
-        setRandomKey(getNewRandomKey());
-    }, []);
+        return { strikeCnt, ballCnt };
+    };
 
     /**
      * Input 함수에 참조 전달할 함수, `checkStrikeBall()` 함수 실행
      */
     const handleKeyDownEnter = () => {
-        checkStrikeBall(randomKey, myKey);
+        checkStrikeBall(value);
     };
+
+    // 첫 렌더링 때 게임 초기화 시키기
+    useEffect(() => {
+        initGame();
+    }, []);
 
     return (
         <BaseballPageWrapper>
-            <Input placeholder="3자리 숫자 입력" handleKeyDownEnter={handleKeyDownEnter} setValue={setMyKey} />
-            <Message>{`${strike}스트라이크${ball}볼`}</Message>
+            <Input placeholder="3자리 숫자 입력" handleKeyDownEnter={handleKeyDownEnter} setValue={setValue} />
+            <Message>{message}</Message>
             <ListContaeinr>
                 <ListItem></ListItem>
             </ListContaeinr>
