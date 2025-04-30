@@ -71,10 +71,47 @@ const Baseball = () => {
     };
 
     /**
+     * 입력값 유효성 검사
+     * @param {string} value 사용자 입력값
+     * @returns {boolean} 유효성 여부
+     */
+    const validateValue = (value) => {
+        // 길이 검사
+        if (value.length !== 3) {
+            if (value.length > 3) {
+                setMessage('최대 3자리의 숫자를 입력해주세요!');
+            } else {
+                setMessage('3자리 숫자를 입력해주세요!');
+            }
+            return false;
+        }
+
+        // 숫자로만 구성되었는지 검사
+        if (!/^\d+$/.test(value)) {
+            setMessage('숫자만 입력해주세요!');
+            return false;
+        }
+
+        // 중복된 숫자가 있는지 검사
+        // Set으로 집합 만들어서 중복되는 애들 하나로 합치면 3보다 작아질 거니까
+        if (new Set(value.split('')).size !== 3) {
+            setMessage('서로 다른 3자리 숫자를 입력해주세요!');
+            return false;
+        }
+
+        if (value === gameState.randomKey) {
+            setMessage('게임 승리!!!!');
+            return false;
+        }
+        // 모든 검사 통과
+        return true;
+    };
+
+    /**
      * Input 함수에 참조 전달할 함수, `checkStrikeBall()` 함수 실행
      */
     const handleKeyDownEnter = () => {
-        checkStrikeBall(value);
+        validateValue(value) ? checkStrikeBall(value) : null;
     };
 
     // 첫 렌더링 때 게임 초기화 시키기
@@ -105,7 +142,11 @@ const BaseballPageWrapper = styled.main`
     gap: 10px;
 `;
 
-const Message = styled.h3``;
+const Message = styled.h3`
+    display: flex;
+    justify-content: center;
+    white-space: nowrap;
+`;
 
 const ListContaeinr = styled.article`
     width: 100%;
