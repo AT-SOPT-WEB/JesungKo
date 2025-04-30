@@ -108,7 +108,8 @@ const Baseball = () => {
         }
 
         if (value === gameState.randomKey) {
-            setMessage('게임 승리!!!!');
+            setMessage('게임 승리!!!!\n 3초 후 게임이 초기화됩니다');
+            setTimeout(() => initGame(), 3000);
             return false;
         }
         // 모든 검사 통과
@@ -155,7 +156,7 @@ const BaseballPageWrapper = styled.main`
 const Message = styled.h3`
     display: flex;
     justify-content: center;
-    white-space: nowrap;
+    white-space: pre-line;
 `;
 
 const ListContaeinr = styled.article`
