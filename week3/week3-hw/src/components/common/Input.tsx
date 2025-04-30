@@ -1,7 +1,17 @@
 import styled from '@emotion/styled';
+import { useState } from 'react';
 
-const Input = ({ placeholder }) => {
-    return <InputStyle placeholder={placeholder} />;
+const Input = ({ placeholder, handleKeyDownEnter, setValue }) => {
+    // Enter 눌렀을 때
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            handleKeyDownEnter();
+        }
+    };
+
+    return (
+        <InputStyle placeholder={placeholder} onChange={(e) => setValue(e.target.value)} onKeyDown={handleKeyDown} />
+    );
 };
 
 export default Input;
