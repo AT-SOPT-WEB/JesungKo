@@ -2,12 +2,11 @@ import GithubCard from './common/GithubCard';
 import Input from './common/Input';
 import styled from '@emotion/styled';
 import RecentSearchCard from './common/RecentSearchCard';
-import ListItem from './common/ListItem';
 
 const Github = () => {
     return (
         <GithubPageWrapper>
-            <Input />
+            <Input placeholder="깃헙 프로필 검색" />
             <SearchKeyContainer>
                 <SearchKeySpan>최근 검색어</SearchKeySpan>
                 <ListContainer>

@@ -14,7 +14,7 @@ export default RecentSearchCard;
 const ItemContainer = styled.section`
     min-width: 15%;
     height: 30px;
-    border-radius: 30px;
+    border-radius: 100px;
     border: 2px solid lightsteelblue;
     padding: 0 10px 0 10px;
     display: flex;
