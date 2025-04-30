@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
-const ListItem = () => {
-    return <ListItemContainer>ㅇㅇㅇ</ListItemContainer>;
+const ListItem = ({ children }) => {
+    return <ListItemContainer>{children}</ListItemContainer>;
 };
 
 export default ListItem;

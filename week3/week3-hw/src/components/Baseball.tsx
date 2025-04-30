@@ -67,6 +67,14 @@ const Baseball = () => {
 
         setMessage(`${strikeCnt}스트라이크 ${ballCnt}볼`);
 
+        // 리스트에 띄우기 위한 정보들
+        const newAttempt = {
+            value: myKey,
+            result: `${strikeCnt}스트라이크 ${ballCnt}볼`,
+        };
+
+        setGameState((prev) => ({ ...prev, attempts: [newAttempt, ...prev.attempts] }));
+
         return { strikeCnt, ballCnt };
     };
 
@@ -124,7 +132,9 @@ const Baseball = () => {
             <Input placeholder="3자리 숫자 입력" handleKeyDownEnter={handleKeyDownEnter} setValue={setValue} />
             <Message>{message}</Message>
             <ListContaeinr>
-                <ListItem></ListItem>
+                {gameState.attempts.map((attempt) => (
+                    <ListItem>{`${attempt.value} : ${attempt.result}`}</ListItem>
+                ))}
             </ListContaeinr>
         </BaseballPageWrapper>
     );
@@ -149,5 +159,8 @@ const Message = styled.h3`
 `;
 
 const ListContaeinr = styled.article`
+    display: flex;
+    flex-direction: column;
     width: 100%;
+    gap: 10px;
 `;
