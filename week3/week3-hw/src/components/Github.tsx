@@ -2,6 +2,7 @@ import GithubCard from './common/GithubCard';
 import Input from './common/Input';
 import styled from '@emotion/styled';
 import RecentSearchCard from './common/RecentSearchCard';
+import ListItem from './common/ListItem';
 
 const Github = () => {
     return (
@@ -9,7 +10,9 @@ const Github = () => {
             <Input />
             <SearchKeyContainer>
                 <SearchKeySpan>최근 검색어</SearchKeySpan>
-                <RecentSearchCard></RecentSearchCard>
+                <ListContainer>
+                    <RecentSearchCard></RecentSearchCard>
+                </ListContainer>
             </SearchKeyContainer>
             <GithubCard></GithubCard>
         </GithubPageWrapper>
@@ -37,4 +40,9 @@ const SearchKeyContainer = styled.section`
 
 const SearchKeySpan = styled.span`
     justify-content: flex-start;
+`;
+
+const ListContainer = styled.section`
+    display: flex;
+    width: 100%;
 `;
