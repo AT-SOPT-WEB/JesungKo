@@ -1,9 +1,7 @@
-import GithubCard from './common/GithubCard';
 import Input from './common/Input';
 import styled from '@emotion/styled';
 import RecentSearchCard from './common/RecentSearchCard';
 import { useEffect, useState } from 'react';
-import Loading from './common/Loading';
 import GithubCardStateManager from './common/GithubCardStateManager';
 
 const Github = () => {
@@ -41,9 +39,17 @@ const Github = () => {
         }
     };
 
+    // 리스트 업데이트 하는데 가장 최근 항목이 오른쪽으로! + 3개 제한
     const updateSearchList = (value) => {
         if (!searchKeyList.includes(value)) {
-            setSearchKeyList((prev) => [value, ...prev]);
+            if (searchKeyList.length >= 3) {
+                setSearchKeyList((prev) => {
+                    const tmpList = [...prev].slice(1);
+                    return [...tmpList, value];
+                });
+            } else {
+                setSearchKeyList((prev) => [...prev, value]);
+            }
         }
     };
 
@@ -112,4 +118,5 @@ const SearchKeySpan = styled.span`
 const ListContainer = styled.section`
     display: flex;
     width: 100%;
+    gap: 8px;
 `;

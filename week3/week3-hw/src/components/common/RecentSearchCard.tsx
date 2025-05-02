@@ -16,13 +16,14 @@ const RecentSearchCard = ({ children, searchKey, onClick, setSearchKeyList }) =>
 export default RecentSearchCard;
 
 const ItemContainer = styled.section`
-    min-width: 15%;
+    min-width: 20%;
     height: 30px;
     border-radius: 100px;
     border: 2px solid lightsteelblue;
     padding: 0 10px 0 10px;
     display: flex;
     align-items: center;
+    justify-content: center;
 `;
 
 const Id = styled.span``;
