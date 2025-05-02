@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 const GAME_STATUS = {
     PLAYING: 'playing',
-    WON: 'won',
+    WON: 'WON',
     LOSE: 'LOSE',
 };
 
@@ -15,10 +15,19 @@ const Baseball = () => {
         randomKey: '',
         attempts: [],
         status: GAME_STATUS.PLAYING,
+        inputState: false,
     });
 
     const [message, setMessage] = useState('');
     const [value, setValue] = useState('');
+
+    useEffect(() => {
+        if (gameState.attempts.length >= 10) {
+            setMessage('게임 패배! 5초 후 게임 다시 시작합니다');
+            setGameState({ ...gameState, inputState: true, status: GAME_STATUS.LOSE });
+            setTimeout(() => initGame(), 5000);
+        }
+    }, [gameState.attempts]);
 
     /**
      * 무작위 세자리 숫자를 만들고 반환하는 함수
@@ -39,8 +48,9 @@ const Baseball = () => {
             randomKey: getNewRandomKey(),
             attempts: [],
             status: GAME_STATUS.PLAYING,
+            inputState: false,
         });
-
+        setValue('');
         setMessage('');
     };
 
@@ -130,7 +140,12 @@ const Baseball = () => {
 
     return (
         <BaseballPageWrapper>
-            <Input placeholder="3자리 숫자 입력" handleKeyDownEnter={handleKeyDownEnter} setValue={setValue} />
+            <Input
+                disable={gameState.inputState}
+                placeholder="3자리 숫자 입력"
+                handleKeyDownEnter={handleKeyDownEnter}
+                setValue={setValue}
+            />
             <Message>{message}</Message>
             <ListContaeinr>
                 {gameState.attempts.map((attempt) => (

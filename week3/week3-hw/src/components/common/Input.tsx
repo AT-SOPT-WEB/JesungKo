@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
 
-const Input = ({ placeholder, handleKeyDownEnter, setValue }) => {
+const Input = ({ placeholder, handleKeyDownEnter, setValue, disable }) => {
     // Enter 눌렀을 때
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
@@ -10,7 +10,12 @@ const Input = ({ placeholder, handleKeyDownEnter, setValue }) => {
     };
 
     return (
-        <InputStyle placeholder={placeholder} onChange={(e) => setValue(e.target.value)} onKeyDown={handleKeyDown} />
+        <InputStyle
+            disabled={disable}
+            placeholder={placeholder}
+            onChange={(e) => setValue(e.target.value)}
+            onKeyDown={handleKeyDown}
+        />
     );
 };
 
