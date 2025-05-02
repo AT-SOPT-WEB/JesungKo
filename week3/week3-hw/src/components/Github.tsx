@@ -2,7 +2,7 @@ import GithubCard from './common/GithubCard';
 import Input from './common/Input';
 import styled from '@emotion/styled';
 import RecentSearchCard from './common/RecentSearchCard';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Loading from './common/Loading';
 import GithubCardStateManager from './common/GithubCardStateManager';
 
@@ -11,6 +11,23 @@ const Github = () => {
     const [userInfo, setUserInfo] = useState({ status: 'idle', data: null });
     const [searchKeyList, setSearchKeyList] = useState([]);
     const [cardState, setCardState] = useState(false);
+
+    // 로컬 스토리지에 있으면 가져오기(있을 때만)
+    useEffect(() => {
+        const savedList = localStorage.getItem('search-list');
+        if (savedList) {
+            const parsedList = JSON.parse(savedList);
+            setSearchKeyList(parsedList);
+        }
+    }, []);
+
+    // 최근 검색어 배열이 빈 배열이 아닐 때만 로컬 스토리지에 저장
+    // 빈 배열일 땐 뺸 이유는 첫 렌더링일 때 빈 배열 상태인데 이때 넣으면 [] 상태로 스토리지에 저장됨!
+    useEffect(() => {
+        if (searchKeyList.length > 0) {
+            localStorage.setItem('search-list', JSON.stringify(searchKeyList));
+        }
+    }, [searchKeyList]);
 
     const getUserInfo = async (user) => {
         setUserInfo({ status: 'pending', data: null });
