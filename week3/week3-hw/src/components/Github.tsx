@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import RecentSearchCard from './common/RecentSearchCard';
 import { useState } from 'react';
 import Loading from './common/Loading';
+import GithubCardStateManager from './common/GithubCardStateManager';
 
 const Github = () => {
     const [value, setValue] = useState('');
@@ -28,6 +29,7 @@ const Github = () => {
             setSearchKeyList((prev) => [value, ...prev]);
         }
     };
+
     // 엔터 키 누르면 작동시킬 함수
     const handleInputKeyDown = () => {
         updateSearchList(value); // 최근 검색어 배열 최신화하고
@@ -57,21 +59,12 @@ const Github = () => {
                     ))}
                 </ListContainer>
             </SearchKeyContainer>
-            {userInfo.status === 'resolved' && cardState && (
-                <GithubCard
-                    bio={userInfo.data.bio}
-                    img={userInfo.data.avatar_url}
-                    name={userInfo.data.name}
-                    id={userInfo.data.login}
-                    follower={userInfo.data.followers}
-                    following={userInfo.data.following}
-                    setCardState={setCardState}
-                    url={userInfo.data.html_url}
-                    handleClickCard={handleClickCard}
-                ></GithubCard>
-            )}
-            {userInfo.status === 'rejected' && <div>없슈</div>}
-            {userInfo.status === 'pending' && <Loading></Loading>}
+            <GithubCardStateManager
+                userInfo={userInfo}
+                cardState={cardState}
+                setCardState={setCardState}
+                handleClickCard={handleClickCard}
+            />
         </GithubPageWrapper>
     );
 };
