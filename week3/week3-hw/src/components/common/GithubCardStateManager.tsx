@@ -3,19 +3,7 @@ import Loading from './Loading';
 
 const GithubCardStateManager = ({ userInfo, cardState, setCardState, handleClickCard }) => {
     if (userInfo.status === 'resolved' && cardState) {
-        return (
-            <GithubCard
-                bio={userInfo.data.bio}
-                img={userInfo.data.avatar_url}
-                name={userInfo.data.name}
-                id={userInfo.data.login}
-                follower={userInfo.data.followers}
-                following={userInfo.data.following}
-                setCardState={setCardState}
-                url={userInfo.data.html_url}
-                handleClickCard={handleClickCard}
-            />
-        );
+        return <GithubCard userInfo={userInfo} setCardState={setCardState} handleClickCard={handleClickCard} />;
     } else if (userInfo.status === 'pending') {
         return <Loading></Loading>;
     } else if (userInfo.status === 'rejected') {

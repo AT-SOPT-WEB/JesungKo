@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-const GithubCard = ({ img, name, id, bio, follower, following, setCardState, url, handleClickCard }) => {
+const GithubCard = ({ userInfo, setCardState, handleClickCard }) => {
     /**
      *
      * @param e 이벤트
@@ -12,24 +12,24 @@ const GithubCard = ({ img, name, id, bio, follower, following, setCardState, url
         func(...args);
     };
     return (
-        <CardWrapper onClick={(e) => handleClickEvent(e, handleClickCard, url)}>
+        <CardWrapper onClick={(e) => handleClickEvent(e, handleClickCard, userInfo.data.html_url)}>
             <Closebtn onClick={(e) => handleClickEvent(e, setCardState, false)}>X</Closebtn>
             <ImgContainer>
-                <Img src={img} />
+                <Img src={userInfo.data.avatar_url} />
             </ImgContainer>
             <TextContainer>
-                <Name>{name}</Name>
-                <GitId>{id}</GitId>
-                <GitBio>{bio}</GitBio>
+                <Name>{userInfo.data.name}</Name>
+                <GitId>{userInfo.data.ogin}</GitId>
+                <GitBio>{userInfo.data.bio}</GitBio>
             </TextContainer>
             <BottomContainer>
                 <FFContainer>
                     <FButtonTitle>follower</FButtonTitle>
-                    <FButtonContent>{follower}</FButtonContent>
+                    <FButtonContent>{userInfo.data.followers}</FButtonContent>
                 </FFContainer>
                 <FFContainer>
                     <FButtonTitle>following</FButtonTitle>
-                    <FButtonContent>{following}</FButtonContent>
+                    <FButtonContent>{userInfo.data.following}</FButtonContent>
                 </FFContainer>
             </BottomContainer>
         </CardWrapper>
