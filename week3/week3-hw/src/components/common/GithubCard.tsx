@@ -1,26 +1,35 @@
 import styled from '@emotion/styled';
-import img from '../../assets/f_1.webp';
 
-const GithubCard = () => {
+const GithubCard = ({ img, name, id, bio, follower, following, setCardState, url, handleClickCard }) => {
+    /**
+     *
+     * @param e 이벤트
+     * @param func 실행시킬 함수
+     * @param args 실행시킬 함수에 들어가는 인자들
+     */
+    const handleClickEvent = (e, func, ...args) => {
+        e.stopPropagation(); // 이벤트 버블링 방지가 중복되니까 그냥 한 번에 처리!
+        func(...args);
+    };
     return (
-        <CardWrapper>
-            <Closebtn>X</Closebtn>
+        <CardWrapper onClick={(e) => handleClickEvent(e, handleClickCard, url)}>
+            <Closebtn onClick={(e) => handleClickEvent(e, setCardState, false)}>X</Closebtn>
             <ImgContainer>
                 <Img src={img} />
             </ImgContainer>
             <TextContainer>
-                <Name>고제성</Name>
-                <GitId>kojesung</GitId>
-                <GitBio>안녕</GitBio>
+                <Name>{name}</Name>
+                <GitId>{id}</GitId>
+                <GitBio>{bio}</GitBio>
             </TextContainer>
             <BottomContainer>
                 <FFContainer>
                     <FButtonTitle>follower</FButtonTitle>
-                    <FButtonContent>2</FButtonContent>
+                    <FButtonContent>{follower}</FButtonContent>
                 </FFContainer>
                 <FFContainer>
                     <FButtonTitle>following</FButtonTitle>
-                    <FButtonContent>5</FButtonContent>
+                    <FButtonContent>{following}</FButtonContent>
                 </FFContainer>
             </BottomContainer>
         </CardWrapper>
@@ -51,6 +60,7 @@ const Closebtn = styled.button`
     top: 10px;
     justify-content: flex-end;
     right: 10px;
+    z-index: 50;
 `;
 
 const ImgContainer = styled.section`

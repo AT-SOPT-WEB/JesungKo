@@ -1,10 +1,14 @@
 import styled from '@emotion/styled';
 
-const RecentSearchCard = () => {
+const RecentSearchCard = ({ children, searchKey, onClick, setSearchKeyList }) => {
+    const handleRemove = (e) => {
+        e.stopPropagation();
+        setSearchKeyList((prev) => prev.filter((item) => item !== searchKey));
+    };
     return (
-        <ItemContainer>
-            <Id>kojesung</Id>
-            <CloseBtn>X</CloseBtn>
+        <ItemContainer onClick={() => onClick(searchKey)}>
+            <Id>{children}</Id>
+            <CloseBtn onClick={handleRemove}>X</CloseBtn>
         </ItemContainer>
     );
 };
