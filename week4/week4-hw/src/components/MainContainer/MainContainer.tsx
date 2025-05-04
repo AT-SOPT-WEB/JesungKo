@@ -10,7 +10,7 @@ const MainContainer = ({ children }: MainContainerProps) => {
     const location = useLocation();
     const isLoginPage = location.pathname === '/';
 
-    return <div className={isLoginPage ? loginContainer : mypageContainer}>{children}</div>;
+    return <main className={isLoginPage ? loginContainer : mypageContainer}>{children}</main>;
 };
 
 export default MainContainer;
