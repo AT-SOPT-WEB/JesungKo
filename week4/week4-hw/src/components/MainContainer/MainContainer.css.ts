@@ -16,4 +16,5 @@ export const mypageContainer = style({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    gap: '10px',
 });

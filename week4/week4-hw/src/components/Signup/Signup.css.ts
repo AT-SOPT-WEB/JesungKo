@@ -6,7 +6,7 @@ export const article = style({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    gap: '10px',
+    gap: '20px',
 });
 
 export const title = style({
