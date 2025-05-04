@@ -1,5 +1,7 @@
+import Router from './Router';
+
 function App() {
-    return <>asdf</>;
+    return <Router />;
 }
 
 export default App;
