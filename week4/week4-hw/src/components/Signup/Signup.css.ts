@@ -1,7 +1,7 @@
 import { style } from '@vanilla-extract/css';
 
 export const article = style({
-    width: '30vw',
+    width: '45vw',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',

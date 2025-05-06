@@ -4,7 +4,8 @@ export const loginArticle = style({
     display: 'flex',
     flexDirection: 'column',
     gap: '20px',
-    width: '30vw',
+    width: '45vw',
     alignItems: 'center',
-    backgroundColor: 'gray',
+    borderRadius: '10px',
+    padding: '20px',
 });

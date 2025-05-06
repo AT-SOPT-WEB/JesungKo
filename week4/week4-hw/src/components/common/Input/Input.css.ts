@@ -13,7 +13,7 @@ export const inputStyle = style({
     width: '100%',
     borderRadius: '10px',
     height: '100%',
-    border: 'none',
+    border: '1px solid black',
     padding: '5px 10px 5px 10px',
 });
 

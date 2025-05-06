@@ -1,8 +1,9 @@
 import Input from '../../common/Input/Input';
 import Button from '../../common/Button/Button';
 import { article, title } from '../Signup.css';
-import { useNavigate } from 'react-router';
+
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const PasswordStage = () => {
     const navigate = useNavigate();
