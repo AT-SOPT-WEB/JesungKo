@@ -1,7 +1,8 @@
 import Input from '../common/Input/Input';
 import Button from '../common/Button/Button';
-import { Link } from 'react-router';
+
 import { loginArticle } from './Login.css';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
     return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { loginContainer, mypageContainer } from './MainContainer.css';
-import { useLocation } from 'react-router';
+import { useLocation } from 'react-router-dom';
 
 interface MainContainerProps {
     children: React.ReactNode;

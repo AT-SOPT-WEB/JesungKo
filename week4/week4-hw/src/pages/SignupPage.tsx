@@ -1,4 +1,4 @@
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import MainContainer from '../components/MainContainer/MainContainer';
 import Signup from '../components/Signup/Signup';
 
