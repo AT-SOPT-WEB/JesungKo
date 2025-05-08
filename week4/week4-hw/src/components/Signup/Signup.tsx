@@ -11,10 +11,10 @@ const Signup = () => {
     switch (stage) {
         case 'ID':
             return <IdStage setStage={setStage} />;
-        case 'NICKNAME':
-            return <NicknameStage setStage={setStage} />;
         case 'PASSWORD':
-            return <PasswordStage />;
+            return <PasswordStage setStage={setStage} />;
+        case 'NICKNAME':
+            return <NicknameStage />;
     }
 };
 
