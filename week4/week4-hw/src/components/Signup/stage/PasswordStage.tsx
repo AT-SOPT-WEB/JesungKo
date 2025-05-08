@@ -24,6 +24,15 @@ const PasswordStage = ({ setStage }: PasswordProps) => {
         return true;
     };
 
+    const setPasswordtoStorage = () => {
+        sessionStorage.setItem('signup-pw', passwordValue);
+    };
+
+    const handleButtonClick = () => {
+        setPasswordtoStorage();
+        setStage('NICKNAME');
+    };
+
     return (
         <article className={article}>
             <h3 className={title}>비밀번호</h3>
@@ -34,7 +43,7 @@ const PasswordStage = ({ setStage }: PasswordProps) => {
                 placeholder="비밀번호를 입력해주세요"
             />
             <Input placeholder="비밀번호 확인" onChange={(e) => setPasswordValueCheck(e.target.value)} />
-            <Button onClick={() => setStage('NICKNAME')} disabled={isBtnDisabled()}>
+            <Button onClick={handleButtonClick} disabled={isBtnDisabled()}>
                 다음
             </Button>
         </article>
