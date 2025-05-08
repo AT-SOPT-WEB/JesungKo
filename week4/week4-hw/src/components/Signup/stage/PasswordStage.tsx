@@ -11,12 +11,30 @@ interface PasswordProps {
 
 const PasswordStage = ({ setStage }: PasswordProps) => {
     const [passwordSee, setPasswordSee] = useState(false);
+    const [passwordValue, setPasswordValue] = useState('');
+    const [passwordValueCheck, setPasswordValueCheck] = useState('');
+
+    const isBtnDisabled = () => {
+        if (passwordValue === passwordValueCheck) {
+            if (passwordValue === '') {
+                return true;
+            }
+            return false;
+        }
+        return true;
+    };
+
     return (
         <article className={article}>
             <h3 className={title}>비밀번호</h3>
-            <Input changeType={setPasswordSee} passwordSee={passwordSee} placeholder="비밀번호를 입력해주세요" />
-            <Input placeholder="비밀번호 확인" />
-            <Button onClick={() => setStage('NICKNAME')} disabled={false}>
+            <Input
+                onChange={(e) => setPasswordValue(e.target.value)}
+                changeType={setPasswordSee}
+                passwordSee={passwordSee}
+                placeholder="비밀번호를 입력해주세요"
+            />
+            <Input placeholder="비밀번호 확인" onChange={(e) => setPasswordValueCheck(e.target.value)} />
+            <Button onClick={() => setStage('NICKNAME')} disabled={isBtnDisabled()}>
                 다음
             </Button>
         </article>
