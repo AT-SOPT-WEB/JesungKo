@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { menuButton, menuSection, navBar } from './NavBar.css';
+import { useEffect } from 'react';
 
 const NavBar = () => {
     const userName = localStorage.getItem('userName');
@@ -10,10 +11,13 @@ const NavBar = () => {
         navigate('/');
     };
 
-    if (!userName) {
-        alert('잘못된 접근임돠, 로그인 후에 오세요!!');
-        navigate('/');
-    }
+    useEffect(() => {
+        if (!userName) {
+            alert('잘못된 접근임돠, 로그인 후에 오세요!!');
+            navigate('/');
+        }
+    }, []);
+
     return (
         <nav className={navBar}>
             <section className={menuSection}>

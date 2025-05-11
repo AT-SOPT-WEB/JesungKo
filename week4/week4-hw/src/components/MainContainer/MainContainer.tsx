@@ -8,7 +8,7 @@ interface MainContainerProps {
 
 const MainContainer = ({ children }: MainContainerProps) => {
     const location = useLocation();
-    const isLoginPage = location.pathname === '/' || 'signup';
+    const isLoginPage = ['/', '/signup'].includes(location.pathname);
 
     return <main className={isLoginPage ? loginContainer : mypageContainer}>{children}</main>;
 };
