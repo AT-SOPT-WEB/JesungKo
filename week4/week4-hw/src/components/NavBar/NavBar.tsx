@@ -1,22 +1,23 @@
 import { useNavigate } from 'react-router-dom';
 import { menuButton, menuSection, navBar } from './NavBar.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const NavBar = () => {
-    const userName = localStorage.getItem('userName');
+    const [userName, setUserName] = useState(() => localStorage.getItem('userName') || '');
     const navigate = useNavigate();
 
     const handleClickLogout = () => {
         localStorage.removeItem('userName');
+        setUserName('');
         navigate('/');
     };
 
     useEffect(() => {
-        if (!userName) {
+        if (!localStorage.getItem('userName')) {
             alert('잘못된 접근임돠, 로그인 후에 오세요!!');
             navigate('/');
         }
-    }, []);
+    }, [navigate]);
 
     return (
         <nav className={navBar}>

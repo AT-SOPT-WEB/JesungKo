@@ -17,11 +17,12 @@ const Login = () => {
     const navigate = useNavigate();
 
     const loginMutation = useMutation<unknown, Error, LoginRequestBody>({
-        mutationFn: (requestBody) => {
-            return apiRequest.post('/api/v1/auth/signin', requestBody);
+        mutationFn: async (requestBody) => {
+            const signinResponse = await apiRequest.post('/api/v1/auth/signin', requestBody);
+            localStorage.setItem('userId', signinResponse.data.data.userId);
+            return signinResponse;
         },
         onSuccess: async (data) => {
-            localStorage.setItem('userId', userId);
             try {
                 const userInfoResponse = await apiRequest.get('/api/v1/users/me', {
                     headers: { userId: data.data.data.userId },
