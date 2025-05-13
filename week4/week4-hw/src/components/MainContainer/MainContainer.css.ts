@@ -11,7 +11,7 @@ export const loginContainer = style({
 
 export const mypageContainer = style({
     display: 'flex',
-    height: 'calc(100vh - 150px)',
+    minHeight: 'calc(100vh - 150px)',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',

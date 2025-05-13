@@ -2,7 +2,7 @@ import { style } from '@vanilla-extract/css';
 
 export const navBar = style({
     height: '110px',
-    width: 'calc(100vw - 100px)',
+    width: 'calc(100vw - 80px)',
     backgroundColor: 'lightgreen',
     padding: '10px 40px 10px 40px',
     display: 'flex',

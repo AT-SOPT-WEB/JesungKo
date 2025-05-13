@@ -21,7 +21,6 @@ const Login = () => {
             return apiRequest.post('/api/v1/auth/signin', requestBody);
         },
         onSuccess: async (data) => {
-            console.log('로그인 성공:', data);
             localStorage.setItem('userId', userId);
             try {
                 const userInfoResponse = await apiRequest.get('/api/v1/users/me', {
